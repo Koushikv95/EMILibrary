@@ -1,0 +1,57 @@
+<IDOCTYPE html>
+
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>sign-in</title>
+    
+        </head>
+        <body>
+        <h1>Sign-in Page</h1>
+        <!--<form action="" method="post">-->        
+        <lable for="email">Email:</lable>
+        <input type="email" id = "emailInput">
+        <lable for="password">password:</lable>
+        <input type="password" id = "passwordInput"> 
+        <lable for="passwordConfirm">password:</lable>
+        <input type="password" id = "passwordInputConfirm"> 
+        <br>
+        <a href="signin.html">Already have an account? Sign-in</a>
+        <button onclick="submitForm()"> Sign-In </button>
+        
+        <!--</form>-->        
+        </body>
+    <script>
+        async function submitForm(){
+
+            console.log("called functon");
+            const useremail = document.getElementById("emailInput").value;
+            console.log(useremail);
+            const userpassword = document.getElementById("passwordInput").value;
+            console.log(userpassword);
+            const userpasswordConfirm = document.getElementById("passwordInputConfirm").value;
+            console.log(userpasswordConfirm);
+            if(userpassword!==userpasswordConfirm){
+                alert("Passwords do not match!");
+                return;
+            }
+            const sendBody = {
+                    
+                    "email":useremail,
+                    "password":userpassword
+            };
+            const options ={
+                body:sendBody,
+                method:"POST"
+            };
+            
+            const res = await fetch("http://localhost:3020/signup",options);
+            console.log("the response is:::",res);
+        }
+
+    </script>
+    
+    </html>
+    
+    

@@ -1,0 +1,58 @@
+<IDOCTYPE html>
+
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>sign-in</title>
+    
+        </head>
+        <body>
+        <h1>Sign-in Page</h1>
+        <!--<form action="" method="post">-->        
+        <lable for="email">Email:</lable>
+        <input type="email" id = "emailInput">
+        <lable for="password">password:</lable>
+        <input type="password" id = "passwordInput"> 
+        <br>
+        <a href="signup.html">Do not have an account? Sign-up</a>
+        <button onclick="submitForm()"> Sign-In </button>
+        
+        <!--</form>-->        
+        </body>
+    <script>
+        async function submitForm(){
+
+            console.log("called functon");
+            const UserEmail = document.getElementById("emailInput").value;
+            console.log(UserEmail);
+            const UserPassword = document.getElementById("passwordInput").value;
+            console.log(UserPassword);
+            
+            const sendBody = {
+                    
+                    "email":UserEmail,
+                    "password":UserPassword
+            };
+
+            const options ={
+                body:sendBody,
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+
+            const res = await fetch("http://localhost:3020/signin",options);
+            console.log("the response is:::",res);
+            if(res.status == 404){
+                alert("sign-in failed! try again with valid credentials");
+                return;
+            };
+        }
+
+    </script>
+    
+    </html>
+    
+    
